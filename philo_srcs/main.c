@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void	init_table(t_table *table, int argc, char **argv)
+static void	init_table(t_table *table, int argc, char **argv)
 {
 	int i;
 	table->philo = ft_atoi(argv[1]);
@@ -13,10 +13,14 @@ void	init_table(t_table *table, int argc, char **argv)
 		table->philo_eat_count = 2147483647;
 	table->curr_philo = 0;
 	table->start_routine = 0;
+	table->start_death = 0;
+	table->finish_eating = 0;
 	table->group = malloc(sizeof(t_philo) * table->philo);
 	i = 0;
 	while (i < table->philo)
 		table->group[i++].eat_count = 0;
+	while (i < table->philo)
+		table->group[i++].death_time = get_time() + 100000;
 }
 
 int	main(int argc, char **argv)

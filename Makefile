@@ -1,6 +1,6 @@
 NAME		= philo
 INCLUDE		= -Iincludes
-FLAGS		= #-Wall -Werror -Wextra
+FLAGS		= -Wall -Werror -Wextra
 CC			= gcc
 RM			= rm -rf
 OBJS_DIR	=./obj
@@ -14,7 +14,7 @@ vpath %.c philo_srcs
 all		: ${NAME}
 
 ${NAME} : ${P_OBJS}
-	${CC} ${FLAGS} ${INCLUDE} $^ -o $@
+	${CC} ${FLAGS} ${INCLUDE} -pthread $^ -o $@
 
 obj/%.o : %.c
 	@mkdir -p obj
