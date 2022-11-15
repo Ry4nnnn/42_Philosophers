@@ -36,7 +36,7 @@ static void	*routine(void *extable)
 
 	table = extable;
 	pthread_mutex_lock(&table->mutex);
-	philo = table->curr_philo;
+	philo = table->curr_philo++;
 	pthread_mutex_unlock(&table->mutex);
 	while (table->start_routine == 0)
 		usleep(table->philo);
@@ -45,6 +45,7 @@ static void	*routine(void *extable)
 		usleep(table->eat_ms * 500);
 	table->start_death = 1;
 	i = 0;
+	printf ("philo_eat_count : %d\nphilo_death : %d\n", table->philo_eat_count, table->philo_death);
 	while (i < table->philo_eat_count && table->philo_death == 0)
 	{
 		if (table->philo == 1)
@@ -52,6 +53,7 @@ static void	*routine(void *extable)
 		philo_live(table, philo);
 		i++;
 	}
+	// printf ("%d", i);
 	return (0);
 }
 

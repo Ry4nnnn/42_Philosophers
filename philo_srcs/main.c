@@ -7,10 +7,9 @@ static void	init_table(t_table *table, int argc, char **argv)
 	table->eat_ms = ft_atoi(argv[3]);
 	table->die_ms = ft_atoi(argv[2]);
 	table->sleep_ms = ft_atoi(argv[4]);
+	table->philo_eat_count = INT_MAX;
 	if (argc == 6)
 		table->philo_eat_count = ft_atoi(argv[5]);
-	else
-		table->philo_eat_count = 2147483647;
 	table->curr_philo = 0;
 	table->start_routine = 0;
 	table->start_death = 0;
@@ -34,5 +33,6 @@ int	main(int argc, char **argv)
 	}
 	init_table(&table, argc, argv);
 	philo(&table);
+	free(table.group);
 	return (0);
 }
