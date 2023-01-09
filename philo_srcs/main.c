@@ -3,7 +3,7 @@
 static void	init_table(t_table *table, int argc, char **argv)
 {
 	int i;
-	table->philo = ft_atoi(argv[1]);
+	table->philo_num = ft_atoi(argv[1]);
 	table->eat_ms = ft_atoi(argv[3]);
 	table->die_ms = ft_atoi(argv[2]);
 	table->sleep_ms = ft_atoi(argv[4]);
@@ -14,11 +14,11 @@ static void	init_table(t_table *table, int argc, char **argv)
 	table->start_routine = 0;
 	table->start_death = 0;
 	table->finish_eating = 0;
-	table->group = malloc(sizeof(t_philo) * table->philo);
+	table->group = malloc(sizeof(t_philo) * table->philo_num);
 	i = 0;
-	while (i < table->philo)
+	while (i < table->philo_num)
 		table->group[i++].eat_count = 0;
-	while (i < table->philo)
+	while (i < table->philo_num)
 		table->group[i++].death_time = get_time() + 100000;
 }
 

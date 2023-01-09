@@ -1,35 +1,42 @@
 #include "philo.h"
 
-static int	double_check(char *args)
+static	int	ft_isdigit(char c)
 {
-	int i;
-	char *c;
-	int test;
+	int	chr;
 
-	i = ft_atoi(args);
-	c = ft_itoa(i);
-	test = ft_strcmp(args, c);
-	free (c);
-	if (test == 0)
-		return (1);
-	return (0);
+	chr = '0';
+	while (chr <= '9')
+	{
+		if (c == chr)
+			return (1);
+		chr++;
+	}
+	return (-1);
+}
+
+static	int	check_digit(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (ft_isdigit(s[i]) < 0)
+			return (-1);
+		i++;
+	}
+	return (1);
 }
 
 int	check_error(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	if (argc != 5 && argc != 6)
-		return (0);
 	while (i < argc)
 	{
-		if (!(double_check(argv[i])))
-			return (0);
-		if (argv[i][0] == '-')
-			return (0);
-		if (ft_atoi(argv[i]) >= INT_MAX)
-			return (0);
+		if (check_digit(argv[i]) < 0)
+			return (-1);
 		i++;
 	}
 	return (1);

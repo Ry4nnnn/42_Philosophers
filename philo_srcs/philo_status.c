@@ -1,4 +1,4 @@
-#include "philo.h"
+ #include "philo.h"
 
 void	philo_think(t_table *table, int philo)
 {
@@ -10,10 +10,10 @@ void	philo_think(t_table *table, int philo)
 void	philo_live(t_table *table, int philo)
 {
 	pthread_mutex_lock(&table->group[philo].fork);
-	pthread_mutex_lock(&table->group[(philo + 1) % table->philo].fork);
+	pthread_mutex_lock(&table->group[(philo + 1) % table->philo_num].fork);
 	philo_eat(table, philo);
 	pthread_mutex_unlock(&table->group[philo].fork);
-	pthread_mutex_unlock(&table->group[(philo + 1) % table->philo].fork);
+	pthread_mutex_unlock(&table->group[(philo + 1) % table->philo_num].fork);
 	philo_sleep(table, philo);
 }
 
@@ -28,7 +28,7 @@ void	philo_sleep(t_table *table, int philo)
 
 void	philo_eat(t_table *table, int philo)
 {
-	if (table->death == 0)
+	if (table->philo_death == 0)
 	{
 		printf(CYN "%lld %d has taken a fork\n", get_time(), philo);
 		printf(CYN "%lld %d has taken a fork\n", get_time(), philo);
@@ -37,16 +37,4 @@ void	philo_eat(t_table *table, int philo)
 	table->group[philo].eat_count++;
 	table->group[philo].death_time = get_time() + (long long)table->die_ms;
 	ft_msleep(table->eat_ms, get_time());
-}
-
-void	ft_msleep(int time, long long start)
-{
-	long long	cur;
-
-	cur = 0;
-	while (cur < (long long)time)
-	{
-		cur = get_time() - start;
-		usleep(100);
-	}
 }

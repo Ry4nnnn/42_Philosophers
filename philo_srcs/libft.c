@@ -1,120 +1,52 @@
 #include "philo.h"
 
-long	ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long	result;
-	long	sign;
+	long	negative;
 
 	result = 0;
-	sign = 1;
-	while ((*str >= 9 && *str <= 13) || (*str == 32))
+	negative = 1;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
-			sign *= -1;
+			negative = -1;
 		str++;
 	}
-	while ((*str >= 48 && *str <= 57) && *str != '\0')
+	while (*str && *str >= '0' && *str <= '9')
 	{
-		result = (*str - 48) + (result * 10);
+		result = (result * 10) + (*str - '0');
 		str++;
+		if (result * negative > 2147483647)
+			return (-1);
+		if (result * negative < -2147483648)
+			return (0);
 	}
-	return (result * sign);
+	return (result * negative);
 }
 
-static int	intlen(long nb)
+long long	get_time(void)
 {
-	int	res;
+	struct timeval	timer;
+	long long		result;
 
-	if (nb == 0)
-		return (1);
-	res = 0;
-	if (nb < 0)
-	{
-		nb = nb * -1;
-		res++;
-	}
-	while (nb > 0)
-	{
-		nb = nb / 10;
-		res++;
-	}
-	return (res);
+	gettimeofday(&timer, NULL);
+	result = (long long)timer.tv_sec * 1000000;
+	result = result + (long long)timer.tv_usec;
+	result = result / 1000;
+	return (result);
 }
 
-char	*ft_itoa(int n)
+void	ft_msleep(int time, long long start)
 {
-	char	*res;
-	int		len;
-	long	nb;
+	long long	cur;
 
-	len = intlen(n);
-	nb = n;
-	if (nb == 0 && len == 1)
-		return (ft_strdup("0"));
-	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (0);
-	res[len--] = 0;
-	if (!nb)
-		res[len] = '\0';
-	if (nb < 0)
+	cur = 0;
+	while (cur < (long long)time)
 	{
-		res[0] = '-';
-		nb *= -1;
+		cur = get_time() - start;
+		usleep(100);
 	}
-	while (nb != 0)
-	{
-		res[len--] = (nb % 10) + '0';
-		nb /= 10;
-	}
-	return (res);
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	unsigned char	c1;
-	unsigned char	c2;
-	unsigned int	i;
-
-	i = 0;
-	while ((s1[i] != '\0' || s2[i] != '\0'))
-	{
-		c1 = s1[i];
-		c2 = s2[i++];
-		if ((c1 - c2) != 0)
-			return (c1 - c2);
-	}
-	return (0);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	size_t	i;
-	size_t	slen;
-	char	*dst;
-
-	slen = ft_strlen(s);
-	dst = (char *)malloc(slen + 1);
-	if (!dst)
-		return (0);
-	i = 0;
-	while (i < slen)
-	{
-		dst[i] = s[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
 }

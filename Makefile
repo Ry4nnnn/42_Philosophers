@@ -1,9 +1,9 @@
 NAME		= philo
 INCLUDE		= -Iincludes
-FLAGS		= -Wall -Werror -Wextra
+FLAGS		= -Wall -Werror -Wextra -fsanitize=thread -g3
 CC			= gcc
 RM			= rm -rf
-OBJS_DIR	=./obj
+OBJS_DIR	= ./obj
 
 SRCS		= ${wildcard philo_srcs/*.c}
 
@@ -14,7 +14,8 @@ vpath %.c philo_srcs
 all		: ${NAME}
 
 ${NAME} : ${P_OBJS}
-	${CC} ${FLAGS} ${INCLUDE} -pthread $^ -o $@
+	@${CC} ${FLAGS} ${INCLUDE} -pthread $^ -o $@
+	@echo "Compiling..."
 
 obj/%.o : %.c
 	@mkdir -p obj

@@ -6,7 +6,7 @@
 /*   By: welim <welim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 23:02:36 by welim             #+#    #+#             */
-/*   Updated: 2022/11/15 15:21:22 by welim            ###   ########.fr       */
+/*   Updated: 2023/01/09 14:54:07 by welim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct	s_table
 	int				curr_philo;
 	int				finish_eating;
 	int				philo_death;
-	int				philo;
+	int				philo_num;
 	int				die_ms;
 	int				eat_ms;
 	int				sleep_ms;
@@ -59,11 +59,9 @@ typedef struct	s_table
 }				t_table;
 
 //libft.c
-long	ft_atoi(const char *str);
-char	*ft_itoa(int n);
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);
+int	ft_atoi(const char *str);
+long long	get_time(void);
+void	ft_msleep(int time, long long start);
 
 //check_error.c
 int	check_error(int argc, char **argv);
@@ -73,12 +71,7 @@ void	philo_think(t_table *table, int philo);
 void	philo_live(t_table *table, int philo);
 void	philo_sleep(t_table *table, int philo);
 void	philo_eat(t_table *table, int philo);
-void	ft_msleep(int time, long long start);
 
 //philo.c
 void	philo(t_table *table);
-
-//philo_utils.c
-long long	get_time(void);
-
 #endif
