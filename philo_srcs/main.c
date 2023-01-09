@@ -1,6 +1,6 @@
 #include "philo.h"
 
-static void	init_table(t_table *table, int argc, char **argv)
+void	init_table(t_table *table, int argc, char **argv)
 {
 	int i;
 	table->philo_num = ft_atoi(argv[1]);

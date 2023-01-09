@@ -45,7 +45,6 @@ static void	*routine(void *extable)
 		usleep(table->eat_ms * 500);
 	table->start_death = 1;
 	i = 0;
-	// printf ("philo_eat_count : %d\nphilo_death : %d\n", table->philo_eat_count, table->philo_death);
 	while (i < table->philo_eat_count && table->philo_death == 0)
 	{
 		if (table->philo_num == 1)
@@ -64,14 +63,12 @@ void	philo(t_table *table)
 	pthread_mutex_init(&table->mutex, NULL);
 	while (i < table->philo_num)
 		pthread_mutex_init(&table->group[i++].fork, NULL);
-	// printf ("check%d\n", i);
 	i = 0;
 	while (i < table->philo_num)
 		pthread_create(&table->group[i++].philo, NULL, *routine, table);
 	table->start_routine = 1;
 	pthread_create(&table->death, NULL, *check_death, table);
 	pthread_join(table->death, NULL);
-	// printf ("check%d\n", i);
 	i = 0;
 	while (i < table->philo_num)
 		pthread_join(table->group[i++].philo, NULL);
