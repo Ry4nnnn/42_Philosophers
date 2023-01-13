@@ -1,6 +1,6 @@
 NAME		= philo
 INCLUDE		= -Iincludes
-FLAGS		= -Wall -Werror -Wextra
+FLAGS		= -Wall -Werror -Wextra -fsanitize=thread -g3
 CC			= gcc
 RM			= rm -rf
 OBJS_DIR	= ./obj

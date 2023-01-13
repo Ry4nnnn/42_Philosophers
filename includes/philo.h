@@ -6,7 +6,7 @@
 /*   By: welim <welim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 23:02:36 by welim             #+#    #+#             */
-/*   Updated: 2023/01/13 19:45:54 by welim            ###   ########.fr       */
+/*   Updated: 2023/01/13 20:26:39 by welim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,23 @@ typedef struct s_philo
 	pthread_mutex_t	*hands[2];
 }					t_philo;
 
-//libft.c
-int			ft_atoi(char *str);
-long long	get_time(void);
-void		ft_msleep(int time, long long start);  
+//philo_utils.c
+int	ft_atoi(char *str);
+int free_exit(t_table *table, t_philo	**philos);
+void	update_state(t_philo *philo, char *message, t_state state);
+void	usleep_chunks(uintmax_t ms);
+uintmax_t	get_time_ms(void);
 
 //philo_status.c
-void		philo_think(t_table *table, int philo);
-void		philo_live(t_table *table, int philo);
-void		philo_sleep(t_table *table, int philo);
-void		philo_eat(t_table *table, int philo);
+void	*philo_start(void *args);
+void	*philo_check(void *args);
+void	*philos_eaten_dead(t_philo *philo, t_state state);
+int		philo_status(t_philo *philo, t_state state);
+void	philo_action(t_philo *philo);
+
 
 //philo.c
-void		philo(t_table *table);
-
-int 	init_table(t_table *table, char **argv);
+int create_threads(t_table *table, t_philo *philos);
+int init_mutex(t_table *table);
+int init_philos(t_table *table, t_philo **philos);
 #endif

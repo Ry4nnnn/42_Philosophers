@@ -55,9 +55,9 @@ int init_philos(t_table *table, t_philo **philos)
 		(*philos)[i].times_eaten = 0;
 		(*philos)[i].eaten_ms = get_time_ms();
 		(*philos)[i].deadline = (*philos)[i].eaten_ms + table->die_ms;
-		(*philos)[i].arg = table;
+		(*philos)[i].table = table;
 		(*philos)[i].hands[0] = &(table->lock.forks[i]);
-		if (i == (*philos)[i].arg->philo_num - 1)
+		if (i == (*philos)[i].table->philo_num - 1)
 			(*philos)[i].hands[1] = &(table->lock.forks[0]);
 		else
 			(*philos)[i].hands[1] = &(table->lock.forks[i + 1]);

@@ -59,9 +59,9 @@ void	*philos_eaten_dead(t_philo *philo, t_state state)
 	return (NULL);
 }
 
-int64_t	philo_status(t_philo *philo, t_state state)
+int	philo_status(t_philo *philo, t_state state)
 {
-	int64_t	done;
+	int	done;
 
 	if (state == EATEN || state == END)
 	{

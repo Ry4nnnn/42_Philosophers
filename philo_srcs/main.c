@@ -1,21 +1,5 @@
 #include "philo.h"
 
-int	create_table(t_table *table, char **argv)
-{
-	table->philo_num = 0;
-	table->die_ms = 0;
-	table->eat_ms = 0;
-	table->sleep_ms = 0;
-	table->start_ms = get_time_ms();
-	table->eat_count = 0;
-	table->philos_eaten = 0;
-	table->is_dead = 0;
-	table->init.fork = 0;
-	table->init.philos = 0;
-	init_table(table, argv);
-	return (0);
-}
-
 int	init_table(t_table *table, char **argv)
 {
 	table->philo_num = ft_atoi(argv[1]);
@@ -36,6 +20,22 @@ int	init_table(t_table *table, char **argv)
 		printf (ERR_VALIDARGS);
 		free_exit(table, NULL);
 	}
+	return (0);
+}
+
+int	create_table(t_table *table, char **argv)
+{
+	table->philo_num = 0;
+	table->die_ms = 0;
+	table->eat_ms = 0;
+	table->sleep_ms = 0;
+	table->start_ms = get_time_ms();
+	table->eat_count = 0;
+	table->philos_eaten = 0;
+	table->is_dead = 0;
+	table->init.fork = 0;
+	table->init.philos = 0;
+	init_table(table, argv);
 	return (0);
 }
 
