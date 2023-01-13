@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: welim <welim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/13 21:53:28 by welim             #+#    #+#             */
+/*   Updated: 2023/01/13 21:54:31 by welim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	init_table(t_table *table, char **argv)
@@ -41,8 +53,8 @@ int	create_table(t_table *table, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_table	table;
-	t_philo *philos;
+	t_table		table;
+	t_philo		*philos;
 
 	if (argc < 5 || argc > 6)
 	{

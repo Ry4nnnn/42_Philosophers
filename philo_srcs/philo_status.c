@@ -1,8 +1,20 @@
- #include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_status.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: welim <welim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/13 21:53:34 by welim             #+#    #+#             */
+/*   Updated: 2023/01/13 21:56:25 by welim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
 
 void	*philo_start(void *args)
 {
-	t_philo *philo;
+	t_philo		*philo;
 	pthread_t	tid;
 
 	philo = (t_philo *)args;
@@ -61,7 +73,7 @@ void	*philos_eaten_dead(t_philo *philo, t_state state)
 
 int	philo_status(t_philo *philo, t_state state)
 {
-	int	done;
+	int		done;
 
 	if (state == EATEN || state == END)
 	{
@@ -86,7 +98,7 @@ int	philo_status(t_philo *philo, t_state state)
 
 void	philo_action(t_philo *philo)
 {
-	int	side;
+	int		side;
 
 	if (philo->seat % 2 == 0)
 		side = 0;

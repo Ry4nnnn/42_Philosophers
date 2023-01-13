@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: welim <welim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/13 21:53:37 by welim             #+#    #+#             */
+/*   Updated: 2023/01/13 21:56:47 by welim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_atoi(char *str)
@@ -27,9 +39,9 @@ int	ft_atoi(char *str)
 	return (sign * integer);
 }
 
-int free_exit(t_table *table, t_philo	**philos)
+int	free_exit(t_table *table, t_philo	**philos)
 {
-	int i;
+	int		i;
 
 	if (table->init.fork)
 	{
@@ -66,7 +78,7 @@ void	update_state(t_philo *philo, char *message, t_state state)
 	{
 		time = get_time_ms() - philo->table->start_ms;
 		printf("%s", color[philo->seat % 7]);
-		printf("%ju Philosophers [%d] %s", time, philo->seat, message);
+		printf("%ju Philosopher [%d] %s", time, philo->seat, message);
 		if (philo->table->eat_count && state == EAT)
 		{
 			pthread_mutex_lock(&philo->table->lock.eat);

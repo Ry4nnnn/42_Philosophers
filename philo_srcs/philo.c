@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: welim <welim@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/13 21:53:39 by welim             #+#    #+#             */
+/*   Updated: 2023/01/13 21:55:14 by welim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int create_threads(t_table *table, t_philo *philos)
+int	create_threads(t_table *table, t_philo *philos)
 {
-	int i;
+	int		i;
 
 	i = -1;
 	while (philos && ++i < table->philo_num)
@@ -16,10 +28,10 @@ int create_threads(t_table *table, t_philo *philos)
 	return (0);
 }
 
-int init_mutex(t_table *table)
+int	init_mutex(t_table *table)
 {
-	int	i;
-	
+	int		i;
+
 	if (pthread_mutex_init(&table->lock.msg, NULL))
 		return (1);
 	if (pthread_mutex_init(&table->lock.dead, NULL))
@@ -33,15 +45,15 @@ int init_mutex(t_table *table)
 	while (++i < table->philo_num)
 	{
 		if (pthread_mutex_init(&(table->lock.forks[i]), NULL))
-		return (1);
+			return (1);
 	}
 	table->init.fork = 1;
 	return (0);
 }
 
-int init_philos(t_table *table, t_philo **philos)
+int	init_philos(t_table *table, t_philo **philos)
 {
-	int i;
+	int		i;
 
 	*philos = NULL;
 	*philos = malloc(sizeof(t_philo) * table->philo_num);
