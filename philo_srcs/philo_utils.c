@@ -6,7 +6,7 @@
 /*   By: welim <welim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:53:37 by welim             #+#    #+#             */
-/*   Updated: 2023/01/13 21:56:47 by welim            ###   ########.fr       */
+/*   Updated: 2023/04/06 11:53:24 by welim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	ft_atoi(char *str)
 	return (sign * integer);
 }
 
+// system("leaks philo");
 int	free_exit(t_table *table, t_philo	**philos)
 {
 	int		i;
@@ -57,7 +58,6 @@ int	free_exit(t_table *table, t_philo	**philos)
 			pthread_mutex_destroy(((*philos)[i].hands[0]));
 		free(*philos);
 	}
-	// system("leaks philo");
 	exit(0);
 }
 

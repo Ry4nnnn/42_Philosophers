@@ -6,7 +6,7 @@
 /*   By: welim <welim@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:53:28 by welim             #+#    #+#             */
-/*   Updated: 2023/01/13 21:54:31 by welim            ###   ########.fr       */
+/*   Updated: 2023/04/06 12:06:04 by welim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,19 @@ int	main(int argc, char **argv)
 	t_philo		*philos;
 
 	if (argc < 5 || argc > 6)
-	{
-		printf (ERR_VALIDARGS ERR_INPUT);
-		return (0);
-	}
+		return (printf (ERR_VALIDARGS ERR_INPUT));
 	create_table(&table, argv);
 	if (init_mutex(&table) || init_philos(&table, &philos))
 	{
 		printf ("Error initializing mutexes\n");
 		free_exit(&table, &philos);
-		return (0);
+		return (1);
 	}
 	if (create_threads(&table, philos))
 	{
 		printf ("Error creating threads\n");
 		free_exit(&table, &philos);
-		return (0);
+		return (1);
 	}
 	free_exit(&table, &philos);
 	return (0);
